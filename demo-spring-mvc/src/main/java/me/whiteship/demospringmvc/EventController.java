@@ -16,6 +16,8 @@ public class EventController {
 		
 		model.addAttribute("events", eventService.getEvents());
 		
+		// github 다른장소에서 커밋 테스트 2010.05.10 
+		
 		return "events";
 	}
 }
