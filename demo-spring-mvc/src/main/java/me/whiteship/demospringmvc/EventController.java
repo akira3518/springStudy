@@ -13,11 +13,13 @@ public class EventController {
 	
 	@GetMapping("/events")
 	public String events(Model model) {
-		
 		model.addAttribute("events", eventService.getEvents());
-		
-		// github 다른장소에서 커밋 테스트 2010.05.10 
-		
+		return "events";
+	}
+	
+	@GetMapping("/events/list")
+	public String events2(Model model) {
+		model.addAttribute("events", eventService.getEvents());
 		return "events";
 	}
 }
