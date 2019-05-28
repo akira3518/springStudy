@@ -4,6 +4,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.inject.Inject;
@@ -41,6 +42,7 @@ public class HomeControllerTest {
 		logger.info("setup!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 	
+	/*
 	@Test
 	public void test() throws Exception {
 		this.mockMvc
@@ -60,14 +62,43 @@ public class HomeControllerTest {
 	
 	@Test
 	public void testDoA() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/doA"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/doA"))
+		.andDo(print())
+		.andExpect(status().isOk());
 	}
 	
 	@Test
-	public void testRoot() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/"));
+	public void testDoC() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/doC?msg=world"))
+		.andDo(print())
+		.andExpect(status().isOk());
 	}
 	
+	@Test
+	public void testDoD() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/doD"))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("productVO"));
+	}
 	
+	@Test
+	public void testDoE() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/doE"))
+		.andDo(print())
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl("doF?msg=this+is+the+message+with+redirected"));
+	} */
+	
+	@Test
+	public void testDoJson() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/doJson"))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect((ResultMatcher) content().contentType("application/json;charset=utf-8"));
+	}
+	
+	//예제참고 사이트
+	//https://doublesprogramming.tistory.com/175
 
 }
